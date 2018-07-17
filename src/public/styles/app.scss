@@ -1,0 +1,70 @@
+@import 'sass/mixins';
+* {
+    @include box-sizing;
+}
+.container-full {
+    @include container(100%);
+}
+.container{
+    @include container(90%);
+}
+.row{
+    @include row();
+}
+.w12 {
+    @include span(12);
+}
+.full-w{
+    @include span(12, $gutter: 0);
+}
+.full-h{
+    min-height: 94%;
+}
+// vertical margin
+.mv1 { 
+    margin: auto span(1);
+}
+html, body {
+    height: 100%;
+    width: 100%;
+    min-width: 267px;
+    padding: 0;
+    margin: 0;
+    font-family: 'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+    font-weight: 400;
+    color: #444;
+}
+#app, .app {
+    height: 100%;
+    background-color: transparent;
+}
+.spinner{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    right: 0;
+    width: 150px;
+    height: 100px;
+    margin: auto;
+}
+@font-face {
+    font-family: 'fontello';
+    src: url('./font/fontello.eot');
+    src: url('./font/fontello.eot#iefix') format('embedded-opentype'),
+         url('./font/fontello.woff') format('woff'),
+         url('./font/fontello.ttf') format('truetype'),
+         url('./font/fontello.svg#fontello') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+       
+.bw-icon {
+    font-family: "fontello";
+}
+@import "sass/functions";
+@import "sass/font-stack";
+@import "sass/variables";
+@import "sass/forms";
+@import "sass/buttons";

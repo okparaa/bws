@@ -1,0 +1,47 @@
+$_button-background-color: $action-color;
+$_button-background-color-hover: $action-color;
+
+$buttons-list: (
+  'button',
+  'input[type="button"]',
+  'input[type="reset"]',
+  'input[type="submit"]'
+);
+
+$all-buttons: assign-inputs($buttons-list);
+
+#{$all-buttons} {
+  background-color: $_button-background-color;
+  border-radius: $base-border-radius + 4px;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-family: $base-font-family;
+  font-size: 16px;
+  line-height: 1;
+  padding: $small-spacing $base-spacing;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color $base-duration $base-timing;
+  vertical-align: middle;
+  white-space: nowrap;
+
+  &:hover {
+    background-color: $_button-background-color-hover;
+    color: $_button-background-color-hover;
+  }
+
+  &:focus {
+    outline: $focus-outline;
+    outline-offset: $focus-outline-offset;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+
+    &:hover {
+      background-color: $_button-background-color;
+    }
+  }
+}

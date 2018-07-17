@@ -1,0 +1,122 @@
+@import 'sass/mixins';
+
+#nav{
+    padding: 0 30px;
+    font-family: 'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+    .current, a:hover{
+       color: #000;
+    };
+    a{
+        color: #137439;
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        text-decoration: none !important;
+    };
+    ul#navbar-menu {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        @include span(8);
+        li {
+            display: inline-block;
+            padding: 8px 10px;
+        };
+        .current {
+            color: #2262AD;
+        }
+    };
+    ul#navbar-user {
+        list-style: none;
+        margin: 0;
+        text-align: right;
+        @include span(4);
+        li {
+            display: inline-block;
+            padding: 8px 10px;
+        };
+        .current {
+            color: #2262AD;
+        }
+    };
+    .block{
+        display: block;
+    }
+}
+#date{
+    padding: 8px 20px;
+    background-color: black;
+    color: #fd3a13;
+    font-size: 0.8rem;
+    font-weight: bolder;
+}
+#menu-icon {
+	display: none;
+	width: 30px;
+	height: 30px;
+}
+#user-icon {
+	display: none;
+	width: 30px;
+    height: 30px;
+}
+
+@media only screen and (max-width : 740px) {
+	#menu-icon {
+        position: relative;
+        display: inline-block;
+        z-index: 20;
+        @include span(2);
+        text-align: left;
+        padding-top: 4px;
+        font-size: 22px !important;
+        color: black !important;
+	}
+	#user-icon {
+        position: relative;
+        display: inline-block;
+        z-index: 20;
+        cursor: pointer;
+        @include span(2, 8);
+        text-align: right; 
+        font-size: 24px !important;
+        color: black !important;     
+	}
+	#nav ul { 
+		display: none;
+		position: absolute;
+		padding: 10px;
+		background: rgba(17, 121, 72, 0.9);
+        left: 0px;
+        z-index: 19;
+        color: whitesmoke;
+		top: 1px;
+        width: 100%;
+	}
+	#nav ul#navbar-menu{
+        @include span(12);
+        padding: 20px 0 10px 0px;
+        li {
+            text-align: left;
+            width: 100%;
+            padding: 15px 0 0 0;
+            margin: 0;
+            a{
+                color: whitesmoke;
+            }
+        }
+    }
+	#nav ul#navbar-user{
+        @include span(12);
+        padding: 20px 30px 10px 0;
+        li {
+            text-align: right;
+            width: 100%;
+            padding: 15px 0 0 0;
+            margin: 0;
+            a{
+                color: whitesmoke;
+            }
+        }
+    }
+}
