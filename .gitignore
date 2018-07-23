@@ -1,6 +1,7 @@
 .DS_Store
 .git
 data.txt
+.vscode
 node_modules/
 /dist/
 npm-debug.log*

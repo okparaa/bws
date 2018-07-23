@@ -89,8 +89,8 @@ form .help{
 }  
 .content{
     @include span(6);
-    min-height: 40px;
     padding: 0 15px;
+    min-height: 5px;
     border-right: 1px solid #5f9ea0; 
     border-left: 1px solid #5f9ea0; 
 }

@@ -1,5 +1,5 @@
 import { h, Component } from 'preact';
-
+import spinner from '@/public/assets/spinner.gif';
 class AsyncRoute extends Component {
 	constructor() {
 		super();
@@ -63,11 +63,10 @@ class AsyncRoute extends Component {
 		return (
 			<div className="container full-h">
 				<div className="spinner">
-					loading...				
+					<img src={spinner} alt="loading"/>				
 				</div>
 			</div>
-		);
-             
+		);             
 	}
 }
 

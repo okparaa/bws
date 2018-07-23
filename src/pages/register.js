@@ -1,5 +1,4 @@
-import { h, Component, cloneElement } from 'preact';
-import { Link } from 'preact-router/match';
+import { h, Component } from 'preact';
 import registerReducer, { 
     fetchRegistrationForm, 
     updateControls, 
@@ -10,7 +9,6 @@ import registerReducer, {
     registerUser
  } from '@/modules/register/register-ducks';
 import '@/public/styles/register.scss';
-import { bindActionCreators } from 'redux';
 import { connect } from 'preact-redux';
 import { addReducer } from '@/components/add-reducer';
 import Input from '@/components/controls';
@@ -18,17 +16,18 @@ import Header from '@/components/header';
 import utils from '@/utils/utils';
 import loadImage from 'blueimp-load-image';
 import Croppr from 'croppr';
+import { bindActionCreators } from 'redux';
 
 class Register extends Component{
     register = (e) => {
         e.preventDefault();
-        let { controls, updateKey, updateControls } = this.props;
+        let { controls, updateKey } = this.props;
         updateKey = utils.guid();
         let isValid = true;
         Object.keys(this.props.controls).map(key => {
             if(!!controls[key].value == false && key !=='id') {
                 isValid = false;
-                console.log(`there is still error in ${key} ${controls[key].error}`)                    
+                //console.log(`there is still error in ${key} ${controls[key].error}`)                    
                 controls[key].error = 'value is required';
                 if(controls[key].type.toLowerCase() !== 'file'){
                     controls[key].attributes.class += ' error';
@@ -36,13 +35,13 @@ class Register extends Component{
                 controls[key].attributes.hintclass += ' texterror';
             }
         });
-        updateControls(controls, updateKey);
-        if(true){
+        this.props.updateControls(controls, updateKey);
+        if(isValid){
             this.props.registerUser();
         } 
     }
     handleChange = (e) => {
-        let { controls, updateControls, updateKey } = this.props;
+        let { controls, updateKey } = this.props;
         updateKey = utils.guid();
         let small = e.target.parentNode.parentNode.querySelector('small');
         controls[e.target.name].value = e.target.value;
@@ -56,7 +55,7 @@ class Register extends Component{
             }
             controls[e.target.name].attributes.hintclass = 'help';
         }
-        updateControls(controls, updateKey);
+        this.props.updateControls(controls, updateKey);
 	}
     displayControls = (controls) => {
         let { modalOpen } = this.props;
@@ -185,13 +184,13 @@ class Register extends Component{
         this.props.fetchRegistrationForm();
     }
     shouldComponentUpdate(nextProps, nextState){
-        return nextProps.controls !== this.props.controls;
+        //console.log(nextProps.controls !== this.props.controls);
+        //return nextProps.controls !== this.props.controls;
     }
     render(){
         let {controls, cropbox, modalOpen, closeModal, openModal} = this.props;
-        console.log(controls);
         return (
-            <div class="container">
+            <div class="container full-h">
                 <div class="row">
                     <div class="leftside">
                         this is the left side
@@ -226,8 +225,8 @@ const mapStateToProps = ({ register }, props) => {
     }
 } 
 
-Register = addReducer('register', registerReducer)(Register)
-export default connect(mapStateToProps, { 
+Register = addReducer('register', registerReducer)(Register);
+export default connect(mapStateToProps, {
     fetchRegistrationForm, 
     updateControls,
     openModal,

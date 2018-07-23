@@ -27,13 +27,12 @@ $all-buttons: assign-inputs($buttons-list);
   white-space: nowrap;
 
   &:hover {
-    background-color: $_button-background-color-hover;
-    color: $_button-background-color-hover;
+    background-color: $_button-background-color;
   }
 
   &:focus {
-    outline: $focus-outline;
-    outline-offset: $focus-outline-offset;
+    outline: none; // $focus-outline;
+    // outline-offset: $focus-outline-offset;
   }
 
   &:disabled {
