@@ -1,4 +1,5 @@
 import { h, Component } from 'preact';
+import { route } from 'preact-router';
 import registerReducer, { 
     fetchRegistrationForm, 
     updateControls, 
@@ -6,13 +7,16 @@ import registerReducer, {
     closeModal,
     selectedBox,
     savePreview,
-    registerUser
- } from '@/modules/register/register-ducks';
+    registerUser,
+    registerUserSuccess,
+    registerUserError
+ } from '@/modules/register-ducks';
 import '@/public/styles/register.scss';
 import { connect } from 'preact-redux';
 import { addReducer } from '@/components/add-reducer';
 import Input from '@/components/controls';
 import Header from '@/components/header';
+import auth  from "@/utils/auth";
 import utils from '@/utils/utils';
 import loadImage from 'blueimp-load-image';
 import Croppr from 'croppr';
@@ -21,13 +25,12 @@ import { bindActionCreators } from 'redux';
 class Register extends Component{
     register = (e) => {
         e.preventDefault();
+        route('/preview', true);
         let { controls, updateKey } = this.props;
-        updateKey = utils.guid();
         let isValid = true;
         Object.keys(this.props.controls).map(key => {
             if(!!controls[key].value == false && key !=='id') {
                 isValid = false;
-                //console.log(`there is still error in ${key} ${controls[key].error}`)                    
                 controls[key].error = 'value is required';
                 if(controls[key].type.toLowerCase() !== 'file'){
                     controls[key].attributes.class += ' error';
@@ -35,9 +38,37 @@ class Register extends Component{
                 controls[key].attributes.hintclass += ' texterror';
             }
         });
-        this.props.updateControls(controls, updateKey);
+        this.props.updateControls(controls, utils.guid());
+        //do registration if successful
         if(isValid){
-            this.props.registerUser();
+            this.props.registerUser()
+            .then(res => {
+                if(res.data.message && res.data.message === 'success'){
+                  this.props.registerUserSuccess(res.data);
+                  auth.setToken(res.data.token);
+                  auth.setItem('passport', res.data.passport);
+                }else{
+                  let userError = {};
+                  for(var field in res.data){
+                    if(res.data.hasOwnProperty(field)){
+                      if(utils.isObject(res.data[field])){
+                        userError[field] = res.data[field];
+                        let errordata = Object.values(res.data[field]);
+                        controls[field].error = errordata[0];
+                        if(controls[field].type.toLowerCase() !== 'file'){
+                            controls[field].attributes.class += ' error';
+                        }
+                        controls[field].attributes.hintclass += ' texterror';
+                      }
+                    }
+                  }
+                  this.props.registerUserError(userError);
+                  this.props.updateControls(controls, utils.guid());
+                }
+              })
+              .catch(error => {
+                this.props.registerUserError(error);
+              });
         } 
     }
     handleChange = (e) => {
@@ -141,8 +172,7 @@ class Register extends Component{
             Array.prototype.forEach.call( containa, function( node ) {
                 node.parentNode.removeChild( node );
             });
-        }
-            //console.log(containa.length);     
+        }    
         var loadingImage = loadImage(
             e.target.files[0],
             function (img) {
@@ -183,10 +213,6 @@ class Register extends Component{
     componentDidMount(){
         this.props.fetchRegistrationForm();
     }
-    shouldComponentUpdate(nextProps, nextState){
-        //console.log(nextProps.controls !== this.props.controls);
-        //return nextProps.controls !== this.props.controls;
-    }
     render(){
         let {controls, cropbox, modalOpen, closeModal, openModal} = this.props;
         return (
@@ -210,7 +236,7 @@ class Register extends Component{
     }
 }
 
-const mapStateToProps = ({ register }, props) => {
+const mapStateToProps = ({ register }) => {
     if(!register)
         return {};
     
@@ -222,6 +248,7 @@ const mapStateToProps = ({ register }, props) => {
         updateKey: register.updateKey,
         cropbox: register.cropbox,
         preview: register.preview,
+        user: register.user
     }
 } 
 
@@ -233,5 +260,7 @@ export default connect(mapStateToProps, {
     closeModal,
     selectedBox,
     savePreview,
-    registerUser
+    registerUser,
+    registerUserSuccess,
+    registerUserError
 })(Register);

@@ -94,5 +94,8 @@ export default {
       }else{
         el.className += ' ' + className;
       }
+    },
+    isObject(item){
+      return (!!item) && (item.constructor === Object);
     }
   }

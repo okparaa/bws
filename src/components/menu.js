@@ -48,7 +48,7 @@ class Menu extends Component {
                 </ul>
             <ul id="navbar-user">
                 { !connected && <span>
-                    <li><Link href="/login">Login</Link></li>
+                    <li><Link href="/">Login</Link></li>
                     <li><Link href="/register">Join Us</Link></li>
                 </span> 
                 }

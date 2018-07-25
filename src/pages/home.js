@@ -1,18 +1,34 @@
 import { h, Component } from 'preact';
 import FbLogin from '@/components/facebook'
 import { Link } from 'preact-router/match';
-import { getUser } from '@/modules/home/home-ducks';
+import { login, loginSuccess, loginError } from '@/modules/home-ducks';
 import Menu from '@/components/menu';
 import '@/public/styles/home.scss';
+import { connect } from 'preact-redux';
+import { route } from 'preact-router';
+import auth from '@/utils/auth';
 
-export default class Home extends Component{
+class Home extends Component{
     constructor(props) {
         super(props);        
     }
     accountLogin = (e) => {
         e.preventDefault();
-        console.log(e.target.username.value)
-        console.log(e.target.password.value)
+        var user = {};
+        user.username = e.target.username.value;
+        user.password = e.target.password.value;
+        this.props.login(user)
+        .then(res => {
+            if(res.data.message && res.data.message == 'success'){
+                auth.setToken(res.data.token);
+                auth.setItem('passport', res.data.passport);
+                this.props.loginSuccess(res.data);
+                route('/preview', true);
+            }
+        })
+        .catch(error => {
+            this.props.loginError(error);
+        });
     }
     render(){
         return (
@@ -33,3 +49,11 @@ export default class Home extends Component{
         );
     }
 }
+const mapStateToProps = ({home}) => {
+    return {
+        user: home.user
+    }
+}
+export default connect(mapStateToProps, {
+    login, loginSuccess, loginError
+})(Home)

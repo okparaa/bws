@@ -63,6 +63,20 @@ html, body {
 .bw-icon {
     font-family: "fontello";
 }
+.leftside{
+    @include span(3);
+}  
+.content{
+    @include span(6);
+    padding: 0 15px;
+    min-height: 5px;
+    border-right: 1px solid #5f9ea0; 
+    border-left: 1px solid #5f9ea0; 
+}
+.rightside{
+    @include span(3);
+}
+
 @import "sass/functions";
 @import "sass/font-stack";
 @import "sass/variables";

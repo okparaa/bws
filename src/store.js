@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from '@/root-reducer';
 import thunkMiddleware from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 const initialState = {
 
@@ -10,7 +11,7 @@ const initializeStore = () => {
     const store = createStore(
         rootReducer(),
         initialState,  
-        applyMiddleware(thunkMiddleware)   
+        composeWithDevTools(applyMiddleware(thunkMiddleware))
     );
     store.asyncReducers = {};
     store.injectReducer = (key, reducer) => {

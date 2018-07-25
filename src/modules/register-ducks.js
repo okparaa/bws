@@ -1,7 +1,7 @@
-import { TX, FDT } from '../../utils/tx';
-import utils from '../../utils/utils';
+import { TX, FDT } from '@/utils/tx';
+import utils from '@/utils/utils';
 
-import { keducer as registerReducer, Types } from '../../utils/keducer';
+import { keducer as registerReducer, Types } from '@/utils/keducer';
 
 export const REGISTRATION_FORM = Types('register', 'REGISTRATION_FORM');
 export const UPDATE_CONTROLS = 'register/UPDATE_CONTROLS';
@@ -74,7 +74,6 @@ export const fetchRegistrationForm = () => dispatch => {
     dispatch(registrationFormSuccess(res.data));
   })
   .catch( error => {
-    // console.error(error);
     dispatch(registrationFormError(error));
   });
 }
@@ -89,7 +88,7 @@ export const registerUserSuccess = (user) => ({
   type: REGISTER_USER.SUCCESS,
   payload: {
     isRegistering: false,
-    user,
+    user: user
   }
 })
 export const registerUserError = (error) => ({
@@ -106,22 +105,5 @@ export const registerUser = () => (dispatch, getState) => {
   Object.keys(controls).map(key => {
     data[key] = controls[key].value;
   });
-  TX.post('/accounts/register', FDT(data))
-    .then(res => {
-      if(res.data.error && res.data.error !== 'error'){
-        dispatch(registerUserSuccess(res.data));
-      }else{
-        
-        for(var field in res.data){
-          if(res.data.hasOwnProperty(field)){
-            console.log(field);
-            console.log(res.data[field]);
-          }
-        }
-        // dispatch(updateControls(controls, utils.guid()));
-      }
-    })
-    .catch(error => {
-      dispatch(registerUserError(error));
-    })
+  return TX.post('/accounts/register', FDT(data));
 }

@@ -18,7 +18,13 @@ export default class App extends Component{
            /* webpackChunkName: "chunk-register" */ `@/pages/register`
         );
         return module.default;
-      };
+    };
+    Preview = async () => {
+        const module = await import(
+           /* webpackChunkName: "chunk-preview" */ `@/pages/preview`
+        );
+        return module.default;
+    };
     render(props){
         let appClass = this.state.url === "/" ? "home" : "app";
         return (
@@ -27,6 +33,7 @@ export default class App extends Component{
             <Router onChange={this.handleRoute}>
                 <Home path="/" />
                 <AsyncRoute path="/register" getComponent={this.Register} />
+                <AsyncRoute path="/preview" getComponent={this.Preview} />
             </Router>
             <Footer url={this.state.url}/>
             </div>

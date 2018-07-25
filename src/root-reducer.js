@@ -1,4 +1,4 @@
-import homeReducer from '@/modules/home/home-ducks';
+import homeReducer from '@/modules/home-ducks';
 import { combineReducers } from 'redux';
 
 const createReducer = asyncReducers => {
