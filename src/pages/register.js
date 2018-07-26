@@ -221,7 +221,7 @@ class Register extends Component{
                     <div class="leftside">
                         this is the left side
                     </div>
-                    <div class="content">
+                    <div class="content border">
                         <form class="" onSubmit={this.register}>
                             {this.displayControls(controls)}
                             { !!controls && controls.hasOwnProperty('id') && !modalOpen && <button class="btn">Register</button>}

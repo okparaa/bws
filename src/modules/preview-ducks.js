@@ -18,14 +18,15 @@ export const profileRequestSuccess = (user) => ({
     type: PROFILE_REQUEST.SUCCESS,
     payload: {
       isFetchingMe: false,
-      user 
+      user,
+      error: null
     }
 });
 export const profileRequestError = (error) => ({
     type: PROFILE_REQUEST.ERROR,
     payload: {
       isFetchingMe: false,
-      error  
+      error
     }
 });
 export const profile = () => dispatch => {

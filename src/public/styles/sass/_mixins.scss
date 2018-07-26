@@ -53,6 +53,7 @@ $grid-top-gutter: 0%;
 @mixin row () {
     display: block;
     margin: 0;
+    @include clearfix();
     // margin-left: -$grid-gutter;
 }
 

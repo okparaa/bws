@@ -1,0 +1,42 @@
+@import 'sass/mixins';
+
+.preview-left, .preview-right{
+    @include span(2);
+}
+.preview{
+    @include span(8);
+}
+.apclogo, .apcmbrpix{
+    @include span(2);
+}
+.apcname{
+    @include span(8);
+    text-align: center;
+    & .apc {
+        font-size: 1.3em;
+        color: green;
+        font-weight: bolder;
+    };
+    & .address{
+        font-weight: bold;
+    }
+}
+.resive{
+    width: 100%;
+    height: auto;
+}
+.border-btm{
+    border-bottom: thin solid #5f9ea0;
+}
+.round{
+    border-radius: 50%;
+}
+.bioprop{
+    @include span(4);
+    font-weight: bold;
+    padding: 8px;
+}
+.bioname{
+    @include span(8);
+    padding: 8px;
+}

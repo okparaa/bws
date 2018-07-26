@@ -4,6 +4,7 @@ import '@/public/styles/menu.scss';
 import utils from '@/utils/utils';
 import { bindActionCreators } from 'redux';
 import { connect } from 'preact-redux';
+import { auth } from '@/utils/auth';
 
 class Menu extends Component {
     toggle(e){
