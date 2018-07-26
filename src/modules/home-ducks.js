@@ -4,6 +4,7 @@ export default homeReducer('home');
 
 export const GET_LOGIN_STATUS = 'home/GET_LOGIN_STATUS';
 export const SET_LOGIN_STATUS = 'home/SET_LOGIN_STATUS';
+export const CONNECTION = 'home/CONNECTION';
 
 export const LOGIN = Types('home', 'LOGIN');
 
@@ -13,10 +14,17 @@ export const loginPending = () => ({
         processing: true
     }
 })
+export const updateStatus = (connected) => ({
+    type: CONNECTION,
+    payload: {
+        connected: connected
+    }
+})
 export const loginSuccess = (user) => ({
     type: LOGIN.SUCCESS,
     payload: {
         processing: false,
+        connected: true,
         user
     }
 })

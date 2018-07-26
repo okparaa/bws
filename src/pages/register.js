@@ -25,7 +25,7 @@ import { bindActionCreators } from 'redux';
 class Register extends Component{
     register = (e) => {
         e.preventDefault();
-        route('/preview', true);
+        route('/profile');
         let { controls, updateKey } = this.props;
         let isValid = true;
         Object.keys(this.props.controls).map(key => {

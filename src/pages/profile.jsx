@@ -1,18 +1,18 @@
 import { h, Component } from 'preact';
-import '@/public/styles/preview.scss';
+import '@/public/styles/profile.scss';
 import { connect } from 'preact-redux';
 import auth from '@/utils/auth';
 import { route } from 'preact-router';
 let photo = "http://ugwumba.org/uploads/"+ auth.getItem('passport');
 let logo = "http://ugwumba.org/uploads/apclogo.jpg";
-import  previewReducer, 
+import  profileReducer, 
         {   profile,
             profileRequestSuccess, 
             profileRequestError 
-        } from '@/modules/preview-ducks';
+        } from '@/modules/profile-ducks';
 import { addReducer } from '@/components/add-reducer';
 
-class Preview extends Component{
+class Profile extends Component{
     componentWillMount(){
         this.props.profile()
         .then(res => {
@@ -31,15 +31,12 @@ class Preview extends Component{
    
     render(){
         let { user } = this.props;
-        let gender = {1: 'Male', 2: 'Female'};
-        let marital = {1: 'Single', 2: 'Married'};
-        //console.log(user);
         return (
             <div class="container full-h">
-                <div class="preview-left">
+                <div class="profile-left">
                     this is the left side
                 </div>
-                <div class="preview border">
+                <div class="profile border">
                 <div className="row border-btm">
                     <div className="apclogo"><img className="resive round" src={photo} alt=""/></div>
                     <div className="apcname border-btm">
@@ -59,24 +56,24 @@ class Preview extends Component{
                 })
                 }                    
                 </div>
-                <div class="preview-right">
+                <div class="profile-right">
                     this is the right side
                 </div>
             </div>
         );
     }
 }
-const mapStateToProps = ({preview}) => {
-    if(!preview)
+const mapStateToProps = ({profile}) => {
+    if(!profile)
         return {};
 
     return {
-        user: preview.user
+        user: profile.user
     }
 }
-Preview = addReducer('preview', previewReducer)(Preview);
+Profile = addReducer('profile', profileReducer)(Profile);
 export default connect(mapStateToProps, {
     profile,
     profileRequestSuccess,
     profileRequestError
-})(Preview);
+})(Profile);

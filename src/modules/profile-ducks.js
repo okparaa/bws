@@ -1,12 +1,12 @@
 import { TX } from '@/utils/tx';
 import utils from '@/utils/utils';
 
-import { keducer as previewReducer, Types } from '@/utils/keducer';
+import { keducer as profileReducer, Types } from '@/utils/keducer';
 
-export const PROFILE = 'preview/PROFILE';
-export const PROFILE_REQUEST = Types('preview', 'PROFILE_REQUEST');
+export const PROFILE = 'profile/PROFILE';
+export const PROFILE_REQUEST = Types('profile', 'PROFILE_REQUEST');
 
-export default previewReducer('preview');
+export default profileReducer('profile');
 
 export const profileRequestPending = () => ({
     type: PROFILE_REQUEST.PENDING,

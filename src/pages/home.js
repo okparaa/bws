@@ -23,7 +23,7 @@ class Home extends Component{
                 auth.setToken(res.data.token);
                 auth.setItem('passport', res.data.passport);
                 this.props.loginSuccess(res.data);
-                route('/preview', true);
+                route('/profile', true);
             }
         })
         .catch(error => {

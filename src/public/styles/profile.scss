@@ -1,9 +1,9 @@
 @import 'sass/mixins';
 
-.preview-left, .preview-right{
+.profile-left, .profile-right{
     @include span(2);
 }
-.preview{
+.profile{
     @include span(8);
 }
 .apclogo, .apcmbrpix{

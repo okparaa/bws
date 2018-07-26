@@ -1,4 +1,5 @@
 import Cookie from 'js-cookie';
+import jwt_decode from 'jwt-decode';
 export default {  
   logout(){
     this.removeToken();
@@ -8,8 +9,13 @@ export default {
   getToken(){
     return Cookie.get('token');
   },
-  isloggedIn() {
-    if(this.getToken()){    
+  isLoggedIn() {
+    if(this.getToken()){ 
+      var jwt = jwt_decode(this.getToken());
+      var current_time = Date.now().valueOf()/1000;
+      if( jwt.exp < current_time) {
+         return false
+      }  
       return true;
     }else{
       return false;
