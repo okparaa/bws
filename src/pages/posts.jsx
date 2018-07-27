@@ -5,8 +5,13 @@ import auth from '@/utils/auth';
 import { route } from 'preact-router';
 import postsReducer from '@/modules/posts-ducks';
 import { addReducer } from '@/components/add-reducer';
+import autosize from 'autosize';
 
 class Posts extends Component{
+    componentDidMount(){
+        var ta = document.getElementById('poster');
+        autosize(ta);
+    }
     render(){
         return(
             <div class="container full-h">
@@ -15,7 +20,12 @@ class Posts extends Component{
                         this is the left side
                     </div>
                     <div class="content">
-                        
+                        <form action="" onSubmit={this.postArticle}>
+                            <div id="posts">
+                                <textarea name="poster" id="poster" ></textarea>
+                                <button class="">send</button>
+                            </div>
+                        </form>
                     </div>
                     <div class="rightside">
                         this is the left side
