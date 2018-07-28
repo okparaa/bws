@@ -8,6 +8,7 @@ export const UPDATE_CONTROLS = 'register/UPDATE_CONTROLS';
 export const SET_MODAL = 'register/SET_MODAL';
 export const SET_CROP_BOX = 'register/SET_CROP_BOX';
 export const SET_PREVIEW = 'register/SET_PREVIEW';
+export const CONNECTION = 'home/CONNECTION';
 export const REGISTER_USER = Types('register', 'REGISTER_USER');
 
 export default registerReducer('register');

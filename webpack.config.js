@@ -78,15 +78,14 @@ module.exports = {
         runtimeChunk: false,
         splitChunks: {
             chunks: 'all',
-            // cacheGroups: {
-            //     default: false,
-            //     commons: {
-            //         test: /[\\/]node_modules[\\/]/,
-            //         name: 'vendor_app',
-                    
-            //         minChunks: 2
-            //     }
-            // }
+            cacheGroups: {
+                default: false,
+                commons: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendor_app',                    
+                    minChunks: 2
+                }
+            }
         }
     },
     plugins: [

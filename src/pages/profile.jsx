@@ -4,7 +4,7 @@ import { connect } from 'preact-redux';
 import auth from '@/utils/auth';
 import { route } from 'preact-router';
 let photo = "http://ugwumba.org/uploads/"+ auth.getItem('passport');
-let logo = "http://ugwumba.org/uploads/apclogo.jpg";
+let logo = "http://ugwumba.org/assets/apclogo.jpg";
 import  profileReducer, 
         {   profile,
             profileRequestSuccess, 

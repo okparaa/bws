@@ -4,6 +4,14 @@ export default {
       Object.keys(data).forEach((key) => { res[data[key].id] = data[key]; });
       return res;
     },
+    dataURLtoBlob: function(dataurl){
+      var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+          bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+      while(n--){
+          u8arr[n] = bstr.charCodeAt(n);
+      }            
+      return new Blob([u8arr], {type:mime});
+    },
     sortObjects(objects, key, reverse = false){
       let sortedKeys = Object.keys(objects).sort((a, b) => {
         if (reverse) return objects[b][key] - objects[a][key];

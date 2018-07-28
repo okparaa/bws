@@ -53,8 +53,8 @@ class Menu extends Component {
         let { connected } = this.props;
       return (
         <div id="nav" class="row">
-            <a href="#" id="menu-icon" class="bw-icon" onClick={this.toggle}>&#xf0c9;</a>
-            <a href="#" id="user-icon" class="bw-icon" onClick={this.toggle}>&#xe800;</a>
+            <a href="#" id="menu-icon" class="bw-icon icon-menu" onClick={this.toggle}></a>
+            <a href="#" id="user-icon" class="bw-icon icon-user" onClick={this.toggle}></a>
             <ul id="navbar-menu">
                 <li> <Link href="/">Home</Link></li>
                 <li><Link href="/">Events</Link></li>

@@ -1,12 +1,12 @@
 import { h, Component } from 'preact';
-import FbLogin from '@/components/facebook'
 import { Link } from 'preact-router/match';
-import { login, loginSuccess, loginError } from '@/modules/home-ducks';
-import Menu from '@/components/menu';
+import { login, loginSuccess, loginError, updateError } from '@/modules/home-ducks';
 import '@/public/styles/home.scss';
 import { connect } from 'preact-redux';
 import { route } from 'preact-router';
 import auth from '@/utils/auth';
+let leader = "http://ugwumba.org/assets/owelle.jpg";
+let chairman = "http://ugwumba.org/assets/chair.jpg";
 
 class Home extends Component{
     constructor(props) {
@@ -23,18 +23,29 @@ class Home extends Component{
                 auth.setToken(res.data.token);
                 auth.setItem('passport', res.data.passport);
                 this.props.loginSuccess(res.data);
-                route('/profile', true);
+                route('/profile');
+            }else{
+                this.props.updateError(true);
             }
         })
         .catch(error => {
-            this.props.loginError(error);
         });
     }
     render(){
         return (
         <div class="container-full">
+            <div class="row">
+                <div class="leader"><img src={leader} className="resive rounded" />State Governor</div>
+                <div class="spacer" >&nbsp;.</div>
+                <div class="chairman"><img src={chairman} className="resive rounded"/> State Chairman</div>
+            </div>
             <div class="landing row">
             <div id="login">
+                { this.props.loginErr ?  
+                    <div style={{textAlign: 'center', color: 'yellow'}}>Wrong! Try again</div>
+                    : 
+                    <div>&nbsp;</div>
+                }
                 <form onSubmit={this.accountLogin}>
                     <p id="user-credential">Username</p>
                     <input type="text" name="username" id="username" placeholder="Enter Username" />
@@ -51,9 +62,10 @@ class Home extends Component{
 }
 const mapStateToProps = ({home}) => {
     return {
-        user: home.user
+        user: home.user,
+        loginErr: home.loginErr
     }
 }
 export default connect(mapStateToProps, {
-    login, loginSuccess, loginError
+    login, loginSuccess, loginError, updateError
 })(Home)

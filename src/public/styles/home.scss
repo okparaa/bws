@@ -1,7 +1,7 @@
   @import "sass/mixins";
 
   .landing form{
-      margin: 20px 0 0 0;
+      margin: 0;
   }
   #login{
     height: auto;
@@ -112,6 +112,17 @@
 }
 .home {
   height: 100%;
-  background: transparent url(../assets/uun.jpg) no-repeat 50% 50%;
+  background: transparent url(../assets/apclogo.jpg) no-repeat 50% 50%;
   background-size: cover;
+}
+.leader, .chairman{
+  @include span(2);
+  text-align: center;
+  font-weight: bolder;
+}
+.spacer{
+  @include span(8);
+}
+.rounded{
+  border-radius: 20%;
 }

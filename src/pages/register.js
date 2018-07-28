@@ -15,17 +15,16 @@ import '@/public/styles/register.scss';
 import { connect } from 'preact-redux';
 import { addReducer } from '@/components/add-reducer';
 import Input from '@/components/controls';
-import Header from '@/components/header';
 import auth  from "@/utils/auth";
 import utils from '@/utils/utils';
 import loadImage from 'blueimp-load-image';
 import Croppr from 'croppr';
-import { bindActionCreators } from 'redux';
+let leader = "http://ugwumba.org/assets/owelle.jpg";
+let chairman = "http://ugwumba.org/assets/chair.jpg";
 
 class Register extends Component{
     register = (e) => {
         e.preventDefault();
-        route('/profile');
         let { controls, updateKey } = this.props;
         let isValid = true;
         Object.keys(this.props.controls).map(key => {
@@ -47,6 +46,7 @@ class Register extends Component{
                   this.props.registerUserSuccess(res.data);
                   auth.setToken(res.data.token);
                   auth.setItem('passport', res.data.passport);
+                  route('/profile');
                 }else{
                   let userError = {};
                   for(var field in res.data){
@@ -219,7 +219,7 @@ class Register extends Component{
             <div class="container full-h">
                 <div class="row">
                     <div class="leftside">
-                        this is the left side
+                        <img src={leader} className="resive rounded" />State Governor
                     </div>
                     <div class="content border">
                         <form class="" onSubmit={this.register}>
@@ -228,8 +228,8 @@ class Register extends Component{
                         </form>
                     </div>
                     <div class="rightside">
-                        this is the right side
-                    </div>
+                     <img src={chairman} className="resive rounded"/> State Chairman
+                   </div>
                 </div>
             </div>
         );
