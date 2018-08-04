@@ -5,8 +5,9 @@ import '@/public/styles/home.scss';
 import { connect } from 'preact-redux';
 import { route } from 'preact-router';
 import auth from '@/utils/auth';
-let leader = "http://ugwumba.org/assets/owelle.jpg";
-let chairman = "http://ugwumba.org/assets/chair.jpg";
+import config from '@/utils/config';
+let leader = config.url + "/assets/owelle.png";
+let chairman = config.url + "/assets/chair.png";
 
 class Home extends Component{
     constructor(props) {
@@ -53,7 +54,7 @@ class Home extends Component{
                     <input type="password" name="password" id="password" placeholder="Enter Password" />
                     <button id="login-button" name="submit">Login</button>
                 </form>
-                <Link href="/">Forget Password</Link> |  <Link href="/register">Join us</Link>
+                <Link href="/">Forget Password</Link> |  <Link href="/register">Join APC</Link>
             </div>
             </div>
         </div>

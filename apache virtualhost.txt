@@ -1,0 +1,39 @@
+<IfModule mod_ssl.c>
+    <VirtualHost *:443>
+
+        ServerAdmin b33wks@gmail.com
+        ServerName theimoapc.org
+        ServerAlias www.theimoapc.org
+        
+        DocumentRoot /var/www/html/theimoapc.org/public_html
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+        <Directory /var/www/html/theimoapc.org/public_html>
+            Order Allow,Deny
+            Allow from all
+        </Directory>
+
+        SSLCertificateFile /etc/letsencrypt/live/theimoapc.org/cert.pem
+        SSLCertificateKeyFile /etc/letsencrypt/live/theimoapc.org/privkey.pem
+        Include /etc/letsencrypt/options-ssl-apache.conf
+        SSLCertificateChainFile /etc/letsencrypt/live/theimoapc.org/chain.pem
+
+    </VirtualHost>
+</IfModule>
+
+<VirtualHost *:80>
+
+    ServerAdmin b33wks@gmail.com
+    ServerName theimoapc.org
+    ServerAlias www.theimoapc.org
+        
+    DocumentRoot /var/www/html/theimoapc.org/public_html
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    <Directory /var/www/html/theimoapc.org/public_html>
+        Order Allow,Deny
+        Allow from all
+    </Directory>
+</VirtualHost>

@@ -1,18 +1,3 @@
-// -----------------------------------------------------------------
-// Map breakpoint
-// -----------------------------------------------------------------
-
-$breakpoints: (
-    'palm': (min-width: 400px),
-    'tab': (min-width: 768px),
-    'lap': (min-width: 1000px),
-    'desk': (min-width: 1200px),
-    'below-palm': (max-width: 399px),
-    'below-tab': (max-width: 767px),
-    'below-lap': (max-width: 999px),
-    'below-desk': (max-width: 1199px)
-) !default;
-
 
 // -----------------------------------------------------------------
 // Variable grid
@@ -79,3 +64,25 @@ $grid-top-gutter: 0%;
   // for testing only below
 //   outline: 1px dashed #f06;
 }
+
+@mixin breakpoint($class) {
+    @if $class == xs {
+      @media (max-width: 767px) { @content; }
+    }
+   
+    @else if $class == sm {
+      @media (min-width: 768px) { @content; }
+    }
+   
+    @else if $class == md {
+      @media (min-width: 992px) { @content; }
+    }
+   
+    @else if $class == lg {
+      @media (min-width: 1200px) { @content; }
+    }
+   
+    @else {
+      @warn "Breakpoint mixin supports: xs, sm, md, lg";
+    }
+  }

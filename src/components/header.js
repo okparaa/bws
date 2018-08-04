@@ -1,6 +1,4 @@
 import { h, Component } from 'preact';
-import { Link } from 'preact-router/match';
-import { route } from 'preact-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'preact-redux';
 import Menu from '@/components/menu';

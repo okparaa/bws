@@ -24,35 +24,35 @@
 
   @media (min-width: 376px) { 
     #login{
+      width: 74%;
+      top: 30%;
+      left: 12%;
+    }
+   }
+
+  @media (min-width: 576px) { 
+    #login{
       width: 60%;
       top: 30%;
       left: 20%;
     }
    }
 
-  @media (min-width: 576px) { 
-    #login{
-      width: 40%;
-      top: 30%;
-      left: 33%;
-    }
-   }
-
   // Medium devices (tablets, 768px and up)
   @media (min-width: 768px) { 
      #login{
-      width: 30%;
+      width: 39%;
       top: 30%;
-      left: 37%;
+      left: 30%;
     }
    }
 
   // Large devices (desktops, 992px and up)
   @media (min-width: 992px) { 
      #login{
-      width: 25%;
+      width: 31%;
       top: 30%;
-      left: 38%;
+      left: 34%;
     }
    }
 
@@ -61,7 +61,7 @@
      #login{
       width: 25%;
       top: 30%;
-      left: 38%;
+      left: 37%;
     }
    }
    
@@ -111,17 +111,27 @@
   margin: auto;
 }
 .home {
-  height: 100%;
-  background: transparent url(../assets/apclogo.jpg) no-repeat 50% 50%;
+  background: transparent url(../assets/apc.jpg) no-repeat 50% 50% fixed;
   background-size: cover;
+  background-position: center;
+  height: 100%;
+
 }
-.leader, .chairman{
-  @include span(2);
+.leader, .chairman {
+  @include span(5);
   text-align: center;
   font-weight: bolder;
+  width: 25%;
+  @include breakpoint('xs'){
+    width: 20%;
+    font-size: 11px;
+  }
+}
+.chairman{
+  float: right;
 }
 .spacer{
-  @include span(8);
+  @include span(2);
 }
 .rounded{
   border-radius: 20%;

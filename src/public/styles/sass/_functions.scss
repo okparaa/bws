@@ -1,3 +1,5 @@
+$mix-percent-default: 15% !default;
+
 @function assign-inputs($inputs, $pseudo: null) {
   $list: ();
 
@@ -8,4 +10,10 @@
   }
 
   @return $list;
+}
+@function shade($color, $percent: $mix-percent-default){
+	@return mix(black, $color, $percent);
+}
+@function tint($color, $percent: $mix-percent-default){
+	@return mix(white, $color, $percent);
 }

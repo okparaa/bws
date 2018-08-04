@@ -51,7 +51,7 @@ module.exports = {
                 loader: 'file-loader',
                 options: {
                   limit: 10000,
-                  name: path.posix.join('public', 'assets', 'img/[name].[ext]')
+                  name: path.posix.join('assets/[name].[ext]')
                 }
             },
         ]
@@ -96,7 +96,7 @@ module.exports = {
             filename: 'index.html', //relative to root of the application
             inlineSource: '[runtime|vendors]~.+\\.js'
         }),
-        new HtmlWebpackInlineSourcePlugin(),
+        //new HtmlWebpackInlineSourcePlugin(),
         // new webpack.optimize.ModuleConcatenationPlugin()
     ],
     devServer: {

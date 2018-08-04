@@ -1,5 +1,6 @@
 import { h, Component } from 'preact';
 import { route } from 'preact-router';
+import spinner from '@/public/assets/loader.gif';
 import registerReducer, { 
     fetchRegistrationForm, 
     updateControls, 
@@ -16,11 +17,12 @@ import { connect } from 'preact-redux';
 import { addReducer } from '@/components/add-reducer';
 import Input from '@/components/controls';
 import auth  from "@/utils/auth";
+import config  from "@/utils/config";
 import utils from '@/utils/utils';
 import loadImage from 'blueimp-load-image';
 import Croppr from 'croppr';
-let leader = "http://ugwumba.org/assets/owelle.jpg";
-let chairman = "http://ugwumba.org/assets/chair.jpg";
+let leader = config.url + "/assets/owelle.jpg";
+let chairman = config.url + "/assets/chair.jpg";
 
 class Register extends Component{
     register = (e) => {
@@ -214,20 +216,26 @@ class Register extends Component{
         this.props.fetchRegistrationForm();
     }
     render(){
-        let {controls, cropbox, modalOpen, closeModal, openModal} = this.props;
+        let {controls, cropbox, modalOpen, closeModal, openModal, loading} = this.props;
         return (
             <div class="container full-h">
                 <div class="row">
-                    <div class="leftside">
+                    <div class="left-col">
                         <img src={leader} className="resive rounded" />State Governor
                     </div>
                     <div class="content border">
-                        <form class="" onSubmit={this.register}>
-                            {this.displayControls(controls)}
-                            { !!controls && controls.hasOwnProperty('id') && !modalOpen && <button class="btn">Register</button>}
-                        </form>
+                        {loading === true ? 
+                            <div className="spinner">
+                                <img src={spinner} alt="loading"/>				
+                            </div>
+                             : 
+                            <form class="" onSubmit={this.register}>
+                                {this.displayControls(controls)}
+                                { !!controls && controls.hasOwnProperty('id') && !modalOpen && <button class="btn">Register</button>}
+                            </form>
+                        }
                     </div>
-                    <div class="rightside">
+                    <div class="right-col">
                      <img src={chairman} className="resive rounded"/> State Chairman
                    </div>
                 </div>

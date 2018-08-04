@@ -1,11 +1,5 @@
 @import 'sass/mixins';
 
-.profile-left, .profile-right{
-    @include span(2);
-}
-.profile{
-    @include span(8);
-}
 .apclogo, .apcmbrpix{
     @include span(2);
 }

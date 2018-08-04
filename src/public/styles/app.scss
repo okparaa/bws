@@ -204,20 +204,29 @@ html, body {
     /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
   }
   
-.leftside{
-    @include span(3);
+.left-col, .right-col{
+  @include breakpoint('sm'){
+    @include span(2);
+  }
+  @include breakpoint('xs'){
+    display: none;
+  }
 } 
 .border {
     border-left: thin solid #5f9ea0;
     border-right: thin solid #5f9ea0;
 }
 .content{
-    @include span(6);
-    padding: 0 15px;
+  @include breakpoint('sm'){
     min-height: 5px;
-}
-.rightside{
-    @include span(3);
+    @include span(8);
+    padding: 0 15px;
+  };
+  @include breakpoint('xs'){
+    min-height: 5px;
+    @include span(12);
+    padding: 15px;
+  };
 }
 
 @import "sass/functions";

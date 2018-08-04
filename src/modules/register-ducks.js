@@ -1,5 +1,4 @@
 import { TX, FDT } from '@/utils/tx';
-import utils from '@/utils/utils';
 
 import { keducer as registerReducer, Types } from '@/utils/keducer';
 

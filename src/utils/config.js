@@ -1,5 +1,4 @@
 export default {
-    // url: 'https://www.ugwumba.net',
-    url: 'http://ugwumba.org',
-    appUrl: 'https:/www.ugwumba.ng',
+    // url: 'http://ugwumba.org',
+    url: 'https://www.theimoapc.org',
 }

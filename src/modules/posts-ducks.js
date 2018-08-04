@@ -1,5 +1,5 @@
 import { TX, FDT } from '@/utils/tx';
-import utils from '@/utils/utils';
+
 import { keducer as postsReducer, Types } from '@/utils/keducer';
 
 export const POST = 'posts/POST';

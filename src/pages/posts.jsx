@@ -10,6 +10,7 @@ import { TX, FDT } from '@/utils/tx';
 import postsReducer, { saveArticle, post } from '@/modules/posts-ducks';
 import { addReducer } from '@/components/add-reducer';
 import autosize from 'autosize';
+let chairman = config.url + "/assets/chair.jpg";
 
 class Posts extends Component{
     constructor(props){
@@ -126,8 +127,8 @@ class Posts extends Component{
         return(
             <div class="container full-h">
                 <div class="row">
-                    <div class="leftside">
-                        this is the left side
+                    <div class="left-col">
+                        Party Officers
                     </div>
                     <div class="content">
                         <form action="" onSubmit={this.postArticle}>
@@ -145,8 +146,8 @@ class Posts extends Component{
                             </div>
                         </form>
                     </div>
-                    <div class="rightside">
-                        this is the left side
+                    <div class="right-col">
+                    <img src={chairman} className="resive rounded"/> State Chairman
                     </div>
                 </div>
             </div>
