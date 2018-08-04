@@ -211,7 +211,10 @@ html, body {
   @include breakpoint('xs'){
     display: none;
   }
-} 
+}
+.control input.error{
+  border: 1px solid shade(red, 20%) !important;
+}
 .border {
     border-left: thin solid #5f9ea0;
     border-right: thin solid #5f9ea0;

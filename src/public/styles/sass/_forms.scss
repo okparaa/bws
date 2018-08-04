@@ -22,7 +22,28 @@ $_text-inputs-list: (
   'textarea',
 );
 
+$_error-inputs-list: (
+  'input[type="color"].error',
+  'input[type="date"].error',
+  'input[type="datetime"].error',
+  'input[type="datetime-local"].error',
+  'input[type="email"].error',
+  'input[type="month"].error',
+  'input[type="number"].error',
+  'input[type="password"].error',
+  'input[type="search"].error',
+  'input[type="tel"].error',
+  'input[type="text"].error',
+  'input[type="time"].error',
+  'input[type="url"].error',
+  'input[type="week"].error',
+  'input:not([type])',
+  'textarea.error',
+);
+
 $all-text-inputs: assign-inputs($_text-inputs-list);
+
+$all-error-inputs: assign-inputs($_error-inputs-list);
 
 fieldset {
   background-color: transparent;
@@ -48,7 +69,9 @@ textarea {
   font-family: $base-font-family;
   font-size: 15px;
 }
-
+#{$all-error-inputs} {
+  border: 1px solid shade(red, 20%) !important;
+}
 #{$all-text-inputs} {
   background-color: $_form-background-color;
   border: $base-border;
@@ -82,22 +105,20 @@ textarea {
   resize: vertical;
 }
 
-[type="checkbox"],
-[type="radio"] {
+[type="checkbox"] {
   display: inline-block;
   margin-right: $small-spacing / 2;
   padding: 0;
 }
 
 select {
-  margin-bottom: $small-spacing;
   width: 100%;
+  padding: $base-spacing / 3;
 }
 
 [type="checkbox"],
 [type="radio"],
-[type="file"],
-select {
+[type="file"] {
   &:focus {
     outline: $focus-outline;
     outline-offset: $focus-outline-offset;

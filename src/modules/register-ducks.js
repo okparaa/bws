@@ -6,9 +6,11 @@ export const REGISTRATION_FORM = Types('register', 'REGISTRATION_FORM');
 export const UPDATE_CONTROLS = 'register/UPDATE_CONTROLS';
 export const SET_MODAL = 'register/SET_MODAL';
 export const SET_CROP_BOX = 'register/SET_CROP_BOX';
+export const SAVE_BLOB = 'register/SAVE_BLOB';
 export const SET_PREVIEW = 'register/SET_PREVIEW';
 export const CONNECTION = 'home/CONNECTION';
 export const REGISTER_USER = Types('register', 'REGISTER_USER');
+export const REGISTER_OFFICE = Types('register', 'REGISTER_OFFICE');
 
 export default registerReducer('register');
 
@@ -28,6 +30,12 @@ export const selectedBox = (cropbox) => ({
   type: SET_CROP_BOX,
   payload: {
     cropbox
+  }
+})
+export const saveBlob = (blob) => ({
+  type: SAVE_BLOB,
+  payload: {
+    photo: blob
   }
 })
 export const closeModal = () => ({
@@ -51,10 +59,11 @@ export const updateControls = (controls, updateKey) => ({
     updateKey
   }
 })
-export const registrationFormSuccess = (controls) => ({
+export const registrationFormSuccess = (response) => ({
   type: REGISTRATION_FORM.SUCCESS,
   payload: {
-    controls: controls,
+    controls: response[0],
+    offices: response[1],
     loading: false,
     error: null
   }
@@ -107,3 +116,4 @@ export const registerUser = () => (dispatch, getState) => {
   });
   return TX.post('/accounts/register', FDT(data));
 }
+

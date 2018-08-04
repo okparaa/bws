@@ -10,7 +10,9 @@ import registerReducer, {
     savePreview,
     registerUser,
     registerUserSuccess,
-    registerUserError
+    registerUserError,
+    saveBlob,
+    getPartyOffices
  } from '@/modules/register-ducks';
 import '@/public/styles/register.scss';
 import { connect } from 'preact-redux';
@@ -27,7 +29,7 @@ let chairman = config.url + "/assets/chair.jpg";
 class Register extends Component{
     register = (e) => {
         e.preventDefault();
-        let { controls, updateKey } = this.props;
+        let { controls, saveBlob } = this.props;
         let isValid = true;
         Object.keys(this.props.controls).map(key => {
             if(!!controls[key].value == false && key !=='id') {
@@ -50,22 +52,22 @@ class Register extends Component{
                   auth.setItem('passport', res.data.passport);
                   route('/profile');
                 }else{
-                  let userError = {};
-                  for(var field in res.data){
-                    if(res.data.hasOwnProperty(field)){
-                      if(utils.isObject(res.data[field])){
-                        userError[field] = res.data[field];
-                        let errordata = Object.values(res.data[field]);
-                        controls[field].error = errordata[0];
-                        if(controls[field].type.toLowerCase() !== 'file'){
-                            controls[field].attributes.class += ' error';
+                    let userError = {};
+                    for(var field in res.data){
+                        if(res.data.hasOwnProperty(field)){
+                            if(utils.isObject(res.data[field])){
+                                userError[field] = res.data[field];
+                                let errordata = Object.values(res.data[field]);
+                                controls[field].error = errordata[0];
+                                if(controls[field].type.toLowerCase() !== 'file'){
+                                    controls[field].attributes.class += ' error';
+                                }
+                                controls[field].attributes.hintclass += ' texterror';
+                            }
                         }
-                        controls[field].attributes.hintclass += ' texterror';
-                      }
                     }
-                  }
-                  this.props.registerUserError(userError);
-                  this.props.updateControls(controls, utils.guid());
+                    this.props.registerUserError(userError);
+                    this.props.updateControls(controls, utils.guid());
                 }
               })
               .catch(error => {
@@ -74,10 +76,14 @@ class Register extends Component{
         } 
     }
     handleChange = (e) => {
-        let { controls, updateKey } = this.props;
+        let { controls, updateKey, offices } = this.props;
         updateKey = utils.guid();
         let small = e.target.parentNode.parentNode.querySelector('small');
         controls[e.target.name].value = e.target.value;
+        if(e.target.type === 'radio' && e.target.name === 'party_posit'){
+            controls.office.value_options = offices[e.target.value];
+            this.props.updateControls(controls);
+        }
         if(utils.hasClass(e.target, 'error')){
             utils.removeClass(e.target, 'error');
             utils.removeClass(small, 'texterror');
@@ -124,7 +130,7 @@ class Register extends Component{
         if(control.info){
             control.hint = control.info;
         }
-        let { cropbox, closeModal, controls } = this.props;
+        let { cropbox, closeModal, saveBlob, controls } = this.props;
         var image = document.querySelector('.croppr-image');
         var tnCanvas = document.createElement('canvas');
         var newWidth = cropbox.width;
@@ -146,8 +152,10 @@ class Register extends Component{
         var prevew = document.createElement('img');
         prevew.id = 'prevew';
         prevew.src = tnCanvas.toDataURL("image/jpeg");
-        //save the blob in the file control           
-        controls.passport.value = this.dataURLtoBlob(tnCanvas.toDataURL("image/jpeg"));
+        //save the passport
+        saveBlob(prevew.src);
+        controls.passport.value = this.dataURLtoBlob(prevew.src);
+
         var passview = document.querySelector('#passview');
         var containa = document.querySelectorAll('.croppr-container');
         if(containa.length){
@@ -212,11 +220,29 @@ class Register extends Component{
         }            
         return new Blob([u8arr], {type:mime});
     }
+    dataURLtoFile = (dataurl, filename) => {
+        var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+        while(n--){
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new File([u8arr], filename, {type:mime});
+    }
     componentDidMount(){
         this.props.fetchRegistrationForm();
     }
+    componentDidUpdate(prevProps, prevState){
+        var passview = document.querySelector('#passview');
+        var preview = document.querySelector('#prevew');
+        if(passview && this.props.photo && !preview){ 
+            var prevew = document.createElement('img');
+            prevew.id = 'prevew';
+            prevew.src = this.props.photo;
+            passview.insertAdjacentElement('afterBegin', prevew);
+        }
+    }
     render(){
-        let {controls, cropbox, modalOpen, closeModal, openModal, loading} = this.props;
+        let {controls, modalOpen, isRegistering, loading} = this.props;        
         return (
             <div class="container full-h">
                 <div class="row">
@@ -224,7 +250,7 @@ class Register extends Component{
                         <img src={leader} className="resive rounded" />State Governor
                     </div>
                     <div class="content border">
-                        {loading === true ? 
+                        {(loading === true || isRegistering === true) ? 
                             <div className="spinner">
                                 <img src={spinner} alt="loading"/>				
                             </div>
@@ -255,8 +281,11 @@ const mapStateToProps = ({ register }) => {
         modalOpen: register.modalOpen || false,
         updateKey: register.updateKey,
         cropbox: register.cropbox,
+        isRegistering: register.isRegistering,
         preview: register.preview,
-        user: register.user
+        offices: register.offices,
+        user: register.user,
+        photo: register.photo
     }
 } 
 
@@ -270,5 +299,7 @@ export default connect(mapStateToProps, {
     savePreview,
     registerUser,
     registerUserSuccess,
-    registerUserError
+    registerUserError,
+    saveBlob,
+    getPartyOffices
 })(Register);

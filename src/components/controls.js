@@ -40,6 +40,17 @@ class Input extends Component {
 			)
 		});
 	}
+	displaySelect = (control, change) =>{
+		return(
+			<select className={control.attributes.class} onInput={change} name={control.name} >
+				<option value=''>Select</option>
+				{
+					Object.keys(control.value_options).map(opt => {
+						return ( <option value={opt}>{control.value_options[opt]}</option> );
+				})}
+			</select>
+		);
+	}
 
 	render() {
 		const {
@@ -116,6 +127,16 @@ class Input extends Component {
 					<span>
 						{this.displayRadio(control, change)}
 						<small className={control.attributes.hintclass}>{ !!control.error ? control.error : control.hint }</small>
+					</span>
+				);
+			break;
+			case 'select':
+				return (
+					<span>
+						<div style={{width: control.attributes.size + '%'}}>
+							{this.displaySelect(control, change)}
+							<small className={control.attributes.hintclass}>{ !!control.error ? control.error : control.hint }</small>
+						</div>
 					</span>
 				);
 			break;
