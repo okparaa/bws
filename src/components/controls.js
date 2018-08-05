@@ -32,7 +32,7 @@ class Input extends Component {
 						className={control.attributes.class} 
 						value={control.options[option].value} 
 						name={control.name}
-						onInput={change}
+						onChange={change}
 						checked={checked}
 					/>
 						{control.options[option].name}

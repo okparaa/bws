@@ -29,7 +29,7 @@ let chairman = config.url + "/assets/chair.jpg";
 class Register extends Component{
     register = (e) => {
         e.preventDefault();
-        let { controls, saveBlob } = this.props;
+        let { controls } = this.props;
         let isValid = true;
         Object.keys(this.props.controls).map(key => {
             if(!!controls[key].value == false && key !=='id') {
@@ -76,14 +76,10 @@ class Register extends Component{
         } 
     }
     handleChange = (e) => {
-        let { controls, updateKey, offices } = this.props;
-        updateKey = utils.guid();
+        e.preventDefault();
+        let { controls, offices } = this.props;
         let small = e.target.parentNode.parentNode.querySelector('small');
         controls[e.target.name].value = e.target.value;
-        if(e.target.type === 'radio' && e.target.name === 'party_posit'){
-            controls.office.value_options = offices[e.target.value];
-            this.props.updateControls(controls);
-        }
         if(utils.hasClass(e.target, 'error')){
             utils.removeClass(e.target, 'error');
             utils.removeClass(small, 'texterror');
@@ -94,7 +90,10 @@ class Register extends Component{
             }
             controls[e.target.name].attributes.hintclass = 'help';
         }
-        this.props.updateControls(controls, updateKey);
+        if(e.target.type === 'radio' && e.target.name === 'party_posit'){
+            controls.office.value_options = offices[e.target.value];
+        }
+        this.props.updateControls(controls, utils.guid());
 	}
     displayControls = (controls) => {
         let { modalOpen } = this.props;
@@ -242,7 +241,7 @@ class Register extends Component{
         }
     }
     render(){
-        let {controls, modalOpen, isRegistering, loading} = this.props;        
+        let {controls, modalOpen, isRegistering, loading} = this.props;       
         return (
             <div class="container full-h">
                 <div class="row">
