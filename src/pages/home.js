@@ -8,6 +8,7 @@ import auth from '@/utils/auth';
 import config from '@/utils/config';
 let leader = config.url + "/assets/owelle.png";
 let chairman = config.url + "/assets/chair.png";
+import loading from "@/public/assets/loading.gif";
 
 class Home extends Component{
     constructor(props) {
@@ -16,6 +17,7 @@ class Home extends Component{
     accountLogin = (e) => {
         e.preventDefault();
         var user = {};
+        this.props.updateError(false);
         user.username = e.target.username.value;
         user.password = e.target.password.value;
         this.props.login(user)
@@ -26,6 +28,7 @@ class Home extends Component{
                 this.props.loginSuccess(res.data);
                 route('/profile');
             }else{
+                this.props.loginError(res.data);
                 this.props.updateError(true);
             }
         })
@@ -52,9 +55,11 @@ class Home extends Component{
                     <input type="text" name="username" id="username" placeholder="Enter Username" />
                     <p id="pass-credential">Password</p>
                     <input type="password" name="password" id="password" placeholder="Enter Password" />
-                    <button id="login-button" name="submit">Login</button>
+                    <button id="login-button" name="submit">
+                    {this.props.processing ? <img src={loading} /> : "Login"}
+                    </button>
                 </form>
-                <Link href="/">Forget Password</Link> |  <Link href="/register">Join APC</Link>
+                <Link href="/">Forget Password</Link> |  <Link className="blink" href="/register">Join APC</Link>
             </div>
             </div>
         </div>
@@ -64,7 +69,8 @@ class Home extends Component{
 const mapStateToProps = ({home}) => {
     return {
         user: home.user,
-        loginErr: home.loginErr
+        loginErr: home.loginErr,
+        processing: home.processing
     }
 }
 export default connect(mapStateToProps, {

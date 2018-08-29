@@ -105,5 +105,8 @@ export default {
     },
     isObject(item){
       return (!!item) && (item.constructor === Object);
+    },
+    isString( val ){
+      return typeof val === 'string' || val instanceof String;
     }
   }

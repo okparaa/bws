@@ -49,6 +49,12 @@ export default class App extends Component{
         );
         return module.default;
     };
+    Profiler = async () => {
+        const module = await import(
+           /* webpackChunkName: "chunk-preview-review" */ `@/pages/profiler`
+        );
+        return module.default;
+    };
     Posts = async () => {
         const module = await import(
            /* webpackChunkName: "chunk-posts" */ `@/pages/posts`
@@ -65,6 +71,7 @@ export default class App extends Component{
                 <AsyncRoute path="/register" getComponent={this.Register} />
                 <AsyncRoute path="/profile" getComponent={this.Profile} />
                 <AsyncRoute path="/posts" getComponent={this.Posts} />
+                <AsyncRoute path="/profiler" getComponent={this.Profiler} />
             </Router>
             <Footer url={this.state.url}/>
             </div>

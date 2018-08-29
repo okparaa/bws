@@ -1,5 +1,5 @@
 {
-  "name": "front-story",
+  "name": "bws",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "async": "^2.6.1",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
@@ -23,12 +24,13 @@
     "babel-preset-preact": "^1.1.0",
     "babel-preset-stage-0": "^6.24.1",
     "clean-webpack-plugin": "^0.1.19",
+    "commander": "^2.17.1",
     "css-loader": "^0.28.11",
     "file-loader": "^1.1.11",
     "html-loader": "^0.5.5",
     "html-webpack-inline-source-plugin": "0.0.10",
     "html-webpack-plugin": "^3.2.0",
-    "node-sass": "^4.8.3",
+    "node-sass": "^4.9.3",
     "nodemon": "^1.17.3",
     "postcss": "^6.0.21",
     "postcss-cssnext": "^3.1.0",
@@ -43,8 +45,8 @@
     "url-loader": "^1.0.1",
     "webpack": "^4.4.1",
     "webpack-bundle-analyzer": "^2.11.1",
-    "webpack-cli": "^2.0.13",
-    "webpack-dev-server": "^3.1.1"
+    "webpack-cli": "^2.1.5",
+    "webpack-dev-server": "^3.1.7"
   },
   "dependencies": {
     "autosize": "^4.0.2",

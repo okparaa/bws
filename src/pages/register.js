@@ -50,6 +50,7 @@ class Register extends Component{
                   this.props.registerUserSuccess(res.data);
                   auth.setToken(res.data.token);
                   auth.setItem('passport', res.data.passport);
+                    this.props.saveBlob(null);
                   route('/profile');
                 }else{
                     let userError = {};
@@ -117,7 +118,7 @@ class Register extends Component{
         var passport = document.querySelector('#passport');
         passport.value = '';
         var passview = document.querySelector('#passview');
-        passview.insertAdjacentElement('afterBegin', this.props.preview);
+    //    passview.insertAdjacentElement('afterBegin', this.props.preview);
         var containa = document.querySelectorAll('.croppr-container');
         if(containa.length){
             Array.prototype.forEach.call( containa, function( node ) {

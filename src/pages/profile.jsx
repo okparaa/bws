@@ -44,7 +44,7 @@ class Profile extends Component{
                     <div className="apcname border-btm">
                         <div className="apc border-btm">ALL PROGRESSIVES CONGRESS</div>
                         <div className="border-btm">Owerri, Imo State</div>
-                        <div className="">Membership Validation</div>
+                        <div className="validation">Membership Validation</div>
                     </div>
                     <div className="apcmbrpix"><img className="resive" src={logo} alt=""/></div>
                 </div>
@@ -52,7 +52,7 @@ class Profile extends Component{
                     return key !== 'passport' && key !== 'message' &&
                     <div className="row border-btm">
                         <div className="bioprop">{key.toUpperCase()}</div>
-                        <div className="bioname">{user[key].toUpperCase()}</div>
+                        <div className="bioname">{user[key]}</div>
                     </div>
                     
                 })
