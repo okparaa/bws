@@ -1,5 +1,5 @@
 {
-  "name": "bws",
+  "name": "bwks-sch",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,7 +7,8 @@
     "dev": "webpack-dev-server --inline --hot --progress --content-base . --mode development --port 3000",
     "build": "webpack --mode production",
     "anal": "webpack --profile --json > stats.json",
-    "stats": "webpack-bundle-analyzer stats.json"
+    "stats": "webpack-bundle-analyzer stats.json",
+    "bot": "node dev_bot/devbot.js"
   },
   "keywords": [],
   "author": "",

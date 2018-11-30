@@ -3,7 +3,7 @@ import { Link } from 'preact-router/match';
 import { route } from 'preact-router';
 import '@/public/styles/menu.scss';
 import utils from '@/utils/utils';
-import { updateStatus } from '@/modules/home-ducks';
+// import { updateStatus } from '@/modules/home-ducks';
 import { connect } from 'preact-redux';
 import auth from '@/utils/auth';
 
@@ -12,7 +12,7 @@ class Menu extends Component {
         super(props);
     }
     componentDidMount(){
-        this.props.updateStatus(auth.isLoggedIn());
+        // this.props.updateStatus(auth.isLoggedIn());
     }
     closeMenu = e => {
         var navbarMenu = document.getElementById('navbar-menu');
@@ -23,7 +23,7 @@ class Menu extends Component {
     logout = e =>{
         e.preventDefault();
         auth.logout();
-        this.props.updateStatus(auth.isLoggedIn());
+        // this.props.updateStatus(auth.isLoggedIn());
         route('/');
     }
     render() {
@@ -54,12 +54,14 @@ class Menu extends Component {
       );
     }
 }
-const mapStateToProps = ({ home }) => {
-    return {
-        connected: home.connected
-    }
-}
+// const mapStateToProps = ({ home }) => {
+//     return {
+//         connected: home.connected
+//     }
+// }
 
-export default connect(mapStateToProps, {
-    updateStatus
-})(Menu);
+export default Menu;
+
+// connect(mapStateToProps, {
+//     updateStatus
+// })(Menu);

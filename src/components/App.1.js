@@ -2,7 +2,7 @@ import {h, Component } from 'preact';
 import { Router, route, getCurrentUrl } from 'preact-router';
 import AsyncRoute  from '@/components/async-route';
 import '@/public/styles/app.scss';
-// import Index from '@/pages/index/index';
+import Index from '@/pages/index/index';
 import Footer from '@/components/footer';
 import Header from '@/components/header';
 import utils from '@/utils/utils';
@@ -37,18 +37,7 @@ export default class App extends Component{
     handleRoute = e => {
         this.setState({url: e.url});
     }
-    Register = async () => { 
-        const module = await import( 
-            /* webpackChunkName: "chunk-register" */ `@/pages/users-pages/register`
-        ); 
-        return module.default; 
-    };
-    Results = async () => { 
-        const module = await import( 
-            /* webpackChunkName: "chunk-results" */ `@/pages/users-pages/results`
-        ); 
-        return module.default; 
-    };
+    
     // __component__
     render(props){
         let appClass = this.state.url === "/" ? "home" : "app";
@@ -56,9 +45,7 @@ export default class App extends Component{
             <div class={appClass} onClick={this.toggle}>
             <Header url={this.state.url} />
             <Router onChange={this.handleRoute}>
-                {/* <Index path="/" /> */}
-                <AsyncRoute path="/register" getComponent={this.Register} />
-                <AsyncRoute path="/results" getComponent={this.Results} />
+                <Index path="/" />
                 {/* __componentElement__ */}
             </Router>
             <Footer url={this.state.url}/>
