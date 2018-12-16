@@ -18,11 +18,11 @@ $all-buttons: assign-inputs($buttons-list);
   display: inline-block;
   font-family: $base-font-family;
   font-size: 16px;
-  line-height: 1;
   padding: $small-spacing $base-spacing;
   text-align: center;
   text-decoration: none;
   vertical-align: middle;
+  border: 0;
 
   &:hover {
     background-color: $_button-background-color;

@@ -2,32 +2,31 @@ import { h, Component } from 'preact';
 import '@/public/styles/users.scss';
 import { Link } from 'preact-router/match';
 import { connect } from 'preact-redux';
-import registerReducer, { register } from '@/ducks/users-ducks/register';
+import getResultReducer, { getResult } from '@/ducks/users-ducks/get-result';
 import { addReducer } from '@/components/add-reducer';
 
-class Register extends Component{
+class GetResult extends Component{
     constructor(props){
         super(props);
     }
-
     render(){
         return(
             <div class="container page">
-                register <Link href="/users/get-result">get result</Link>
+            get result <Link href="/users/register">register</Link>
             </div>
         )
     }
 }
 
-const mapStateToProps = ({register}) => {
-    if(!register)
+const mapStateToProps = ({getResult}) => {
+    if(!getResult)
         return {};
 
     return {
-        item: register.item
+        item: getResult.item
     }
 }
-Register = addReducer('register', registerReducer)(Register);
+GetResult = addReducer('getResult', getResultReducer)(GetResult);
 export default connect(mapStateToProps, {
-    register
-})(Register);
+    getResult
+})(GetResult);

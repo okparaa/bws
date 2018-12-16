@@ -1,8 +1,8 @@
 import {h, Component } from 'preact';
 import { Router, route, getCurrentUrl } from 'preact-router';
-import AsyncRoute  from '@/components/async-route';
+import LiquidRoute  from '@/components/liquid-route';
+import fadeAnimation from '@/components/fade-animation';
 import '@/public/styles/app.scss';
-// import Index from '@/pages/index/index';
 import Footer from '@/components/footer';
 import Header from '@/components/header';
 import utils from '@/utils/utils';
@@ -37,15 +37,22 @@ export default class App extends Component{
     handleRoute = e => {
         this.setState({url: e.url});
     }
+    Index = async () => {
+        const module = await import (
+           /* webpackChunkName: "chunk-index" */ `@/pages/index-pages/index`            
+        );
+        return module.default;
+    } 
+
     Register = async () => { 
         const module = await import( 
             /* webpackChunkName: "chunk-register" */ `@/pages/users-pages/register`
         ); 
         return module.default; 
     };
-    Results = async () => { 
+    GetResult = async () => { 
         const module = await import( 
-            /* webpackChunkName: "chunk-results" */ `@/pages/users-pages/results`
+            /* webpackChunkName: "chunk-get-result" */ `@/pages/users-pages/get-result`
         ); 
         return module.default; 
     };
@@ -56,9 +63,9 @@ export default class App extends Component{
             <div class={appClass} onClick={this.toggle}>
             <Header url={this.state.url} />
             <Router onChange={this.handleRoute}>
-                {/* <Index path="/" /> */}
-                <AsyncRoute path="/register" getComponent={this.Register} />
-                <AsyncRoute path="/results" getComponent={this.Results} />
+                <LiquidRoute animator={fadeAnimation} getComponent={this.Index} path="/" />
+                <LiquidRoute animator={fadeAnimation} path="/users/register" getComponent={this.Register} />
+                <LiquidRoute animator={fadeAnimation} path="/users/get-result" getComponent={this.GetResult} />
                 {/* __componentElement__ */}
             </Router>
             <Footer url={this.state.url}/>

@@ -29,20 +29,17 @@ class Menu extends Component {
     render() {
         let { connected } = this.props;
       return (
-        <div id="nav" class="row">
+        <div class="container">
             <a href="#" id="menu-icon" class="bw-icon icon-menu"></a>
             <a href="#" id="user-icon" class="bw-icon icon-user"></a>
             <ul id="navbar-menu">
-                <li><Link onClick={this.closeMenu} href="/">Home</Link></li>
-                <li><Link onClick={this.closeMenu} href="/">Events</Link></li>
-                <li><Link onClick={this.closeMenu} href="/">Politics</Link></li>
-                </ul>
+                <li><Link onClick={this.closeMenu} href="/">Login</Link></li>
+            </ul>
             <ul id="navbar-user">
-                { !connected && <span>
-                    <li><Link onClick={this.closeMenu} href="/">Login</Link></li>
-                    <li><Link onClick={this.closeMenu} href="/register">APC Register</Link></li>
-                </span> 
-                }
+                { !connected && <li> <b>Register</b>&nbsp;
+                {"{"}&nbsp;<Link onClick={this.closeMenu} href="/users/register">Student</Link> | <Link onClick={this.closeMenu} href="/users/xregister">Staff</Link>&nbsp;{"}"}
+                </li> 
+             }
                 { connected && <span>
                     <li><Link onClick={this.closeMenu} href="/posts">Write</Link></li>
                     <li><Link onClick={this.closeMenu} href="/profile">Profile</Link></li>

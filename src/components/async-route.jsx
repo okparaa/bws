@@ -8,7 +8,7 @@ class AsyncRoute extends Component {
 		};
 	}
 	loadComponent(){
-		if (this.props.component) {
+		if (this.props.component) { 
 			return this.setState({
 				componentData: this.props.component
 			});
@@ -55,7 +55,7 @@ class AsyncRoute extends Component {
 	}
 	render(){   
 		if (this.state.componentData) {
-			return h(this.state.componentData, this.props);
+			return h(this.state.componentData,  ...this.props);
 		} else if (this.props.loading) {
 			const loadingComponent = this.props.loading();
 			return loadingComponent;
@@ -65,8 +65,8 @@ class AsyncRoute extends Component {
 				<div className="spinner">
 					<img src={spinner} alt="loading"/>				
 				</div>
-			</div>
-		);             
+			</div> 
+		)           
 	}
 }
 

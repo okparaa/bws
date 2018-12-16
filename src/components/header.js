@@ -6,19 +6,8 @@ import Menu from '@/components/menu';
 class Header extends Component {
     render(props) {
       return (
-        <div class="container-full">
+        <div class="container-full" id="nav">
             <Menu className="row" />
-            { props.url !== "/" && <div class="row">
-                <div id="date" class="full-w">Monday, April 23, 2018 23:51am</div>
-                <div class="social">
-                    <a href="/accounts/register" class="fa fa-facebook"></a>
-                    <a href="/accounts/register" class="fa fa-twitter"></a>
-                    <a href="/accounts/register" class="fa fa-google-plus"></a>
-                    <a href="/accounts/register" class="fa fa-linkedin"></a>
-                    <a href="/accounts/register" class="fa fa-youtube"></a>
-                    <a href="/accounts/register" class="fa fa-vimeo-square"></a>
-                </div>
-            </div>}
         </div>
       );
     }

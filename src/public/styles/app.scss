@@ -1,0 +1,287 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  min-width: 267px;
+  padding: 0;
+  font-size: 14px;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #444;
+}
+
+@media (max-width: 467px) {
+  .container {
+    width: 330px;
+  }
+}
+@media (min-width: 468px) {
+  .container {
+    width: 410px;
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    width: 710px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 940px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1140px;
+  }
+}
+
+.page-container {
+    display: block;
+    padding: 10px;
+}
+.bws-page{
+    width: 100%;
+}
+@import 'sass/mixins';
+* {
+    @include box-sizing;
+}
+
+.container-full {
+    @include container(100%);
+}
+.container{
+  border-right: 1px solid #a4ffa4;
+  border-left: 1px solid #a4ffa4;
+  @include container(90%);
+  padding: 6px 10px;
+  position: relative;
+}
+.contain-top{
+  border-top: 1px solid #a4ffa4;
+}
+.contain-bottom{
+  border-bottom: 1px solid #a4ffa4;
+}
+.row{
+    @include row();
+}
+.w12 {
+    @include span(12);
+}
+.full-w{
+    @include span(12, $gutter: 0);
+}
+.full-h{
+    min-height: 83%;
+}
+// vertical margin
+.mv1 { 
+    margin: auto span(1);
+}
+b, strong {
+  font-weight: bold;
+}
+#app, .app {
+    height: 100%;
+    background-color: transparent;
+}
+.spinner{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    width: 150px;
+    height: 100px;
+    margin: auto;
+}
+@font-face {
+  font-family: 'fontello';
+  src: url('./font/fontello.eot?');
+  src: url('./font/fontello.eot?#iefix') format('embedded-opentype'),
+       url('./font/fontello.woff?') format('woff'),
+       url('./font/fontello.ttf?') format('truetype'),
+       url('./font/fontello.svg?#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+   
+       
+.bw-icon {
+    font-family: "fontello";
+}
+.resize{
+  width: 100%;
+  height: auto;
+}
+.animate-spin {
+    -moz-animation: spin 2s infinite linear;
+    -o-animation: spin 2s infinite linear;
+    -webkit-animation: spin 2s infinite linear;
+    animation: spin 2s infinite linear;
+    display: inline-block;
+  }
+  @-moz-keyframes spin {
+    0% {
+      -moz-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      -moz-transform: rotate(359deg);
+      -o-transform: rotate(359deg);
+      -webkit-transform: rotate(359deg);
+      transform: rotate(359deg);
+    }
+  }
+  @-webkit-keyframes spin {
+    0% {
+      -moz-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      -moz-transform: rotate(359deg);
+      -o-transform: rotate(359deg);
+      -webkit-transform: rotate(359deg);
+      transform: rotate(359deg);
+    }
+  }
+  @-o-keyframes spin {
+    0% {
+      -moz-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      -moz-transform: rotate(359deg);
+      -o-transform: rotate(359deg);
+      -webkit-transform: rotate(359deg);
+      transform: rotate(359deg);
+    }
+  }
+  @-ms-keyframes spin {
+    0% {
+      -moz-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      -moz-transform: rotate(359deg);
+      -o-transform: rotate(359deg);
+      -webkit-transform: rotate(359deg);
+      transform: rotate(359deg);
+    }
+  }
+  @keyframes spin {
+    0% {
+      -moz-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      -moz-transform: rotate(359deg);
+      -o-transform: rotate(359deg);
+      -webkit-transform: rotate(359deg);
+      transform: rotate(359deg);
+    }
+  }
+
+  .icon-user:before { content: '\e800'; } /* '' */
+  .icon-off:before { content: '\e801'; } /* '' */
+  .icon-forward:before { content: '\e802'; } /* '' */
+  .icon-down-dir:before { content: '\e803'; } /* '' */
+  .icon-up-dir:before { content: '\e804'; } /* '' */
+  .icon-twitter:before { content: '\e805'; } /* '' */
+  .icon-reply:before { content: '\e806'; } /* '' */
+  .icon-comment:before { content: '\e807'; } /* '' */
+  .icon-picture:before { content: '\e808'; } /* '' */
+  .icon-picture-1:before { content: '\e809'; } /* '' */
+  .icon-cancel:before { content: '\e80a'; } /* '' */
+  .icon-cog-1:before { content: '\e80c'; } /* '' */
+  .icon-spin3:before { content: '\e832'; } /* '' */
+  .icon-menu:before { content: '\f008'; } /* '' */
+  .icon-facebook:before { content: '\f09a'; } /* '' */
+  .icon-linkedin:before { content: '\f0e1'; } /* '' */
+  .icon-vimeo:before { content: '\f306'; } /* '' */
+  .icon-gplus:before { content: '\f30f'; } /* '' */
+
+[class^="icon-"]:before, [class*=" icon-"]:before {
+    font-family: "fontello";
+    font-style: normal;
+    font-weight: normal;
+   
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: .2em;
+    text-align: center;
+    /* opacity: .8; */
+   
+    /* For safety - reset parent styles, that can break glyph codes*/
+    font-variant: normal;
+    text-transform: none;
+   
+    /* fix buttons height, for twitter bootstrap */
+    line-height: 1em;
+   
+    /* Animation center compensation - margins should be symmetric */
+    /* remove if not needed */
+    margin-left: .2em;
+   
+    /* you can be more comfortable with increased icons size */
+    /* font-size: 120%; */
+   
+    /* Font smoothing. That was taken from TWBS */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+   
+    /* Uncomment for 3D effect */
+    /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+  }
+  
+.left-col, .right-col{
+  @include breakpoint('sm'){
+    @include span(2);
+  }
+  @include breakpoint('xs'){
+    display: none;
+  }
+}
+.control input.error{
+  border: 1px solid shade(red, 20%) !important;
+}
+.border {
+    border-left: thin solid #5f9ea0;
+    border-right: thin solid #5f9ea0;
+}
+.content{
+  @include breakpoint('sm'){
+    min-height: 5px;
+    @include span(8);
+    padding: 0 15px;
+  };
+  @include breakpoint('xs'){
+    min-height: 5px;
+    @include span(12);
+    padding: 15px;
+  };
+}
+
+@import "sass/functions";
+@import "sass/font-stack";
+@import "sass/variables";
+@import "sass/forms";
+@import "sass/buttons";

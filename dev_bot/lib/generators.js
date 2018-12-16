@@ -23,7 +23,10 @@ function generatePage(path, pagePath, pageName, pageDir, cb) {
         var page = ft.loadTemplateSync('page.' + extension);
         page = page.replace(/__pageScss__/, pageDir);
         page = page.replace(/__pageDir__/, pageDir);
-        page = page.replace(/__page__/g, pageName);
+        page = page.replace(/__page__/, fcLower(ucwords(pageName)));
+        page = page.replace(/__page__/, fcLower(ucwords(pageName)));
+        page = page.replace(/__page__/, pageName);
+        page = page.replace(/__page__/g, fcLower(ucwords(pageName)));
         page = page.replace(/__pageClass__/g, ucwords(pageName));
         ft.createDirIfIsNotDefined(path, pagePath + '-pages', function () {
             ft.writeFile(path + '\\' + pagePath + '-pages\\' + pageName + '.' + extension, page, null, cb);
@@ -47,7 +50,7 @@ function generateDuck(path, duckPath, duckName, cb) {
     }else{
         var duck = ft.loadTemplateSync('duck.' + extension);
         
-        duck = duck.replace(/__duck__/g, duckName); 
+        duck = duck.replace(/__duck__/g, fcLower(ucwords(duckName))); 
         ft.createDirIfIsNotDefined(path, duckPath + '-ducks', function () {
             ft.writeFile( path + '\\' + duckPath + '-ducks\\' + duckName + '.' + extension, duck, null, cb);
         });
@@ -77,6 +80,7 @@ function updateApp(path, appDir, pageDir, pageName, cb) {
         componentImport = componentImport.replace(/__component__/, ucwords(pageName));
         
         var componentElement =  ft.loadTemplateSync('component-element.' + extension);
+        componentElement = componentElement.replace(/__component-dir__/, pageDir);
         componentElement = componentElement.replace(/__component-path__/, pageName);
         componentElement = componentElement.replace(/__component__/, ucwords(pageName));
         app = app.replace(/\/\/ __component__/, componentImport);
